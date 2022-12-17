@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "customview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanKispaj/CustomView.git",
+      "state" : {
+        "revision" : "b247f0965667c172838c0460d031c3105768cb6e",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "viewmodifiers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanKispaj/ViewModifiers.git",
+      "state" : {
+        "revision" : "c94c633dad9f392d9ad85c7481b6c29a557c6a64",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

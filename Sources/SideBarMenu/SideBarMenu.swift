@@ -150,7 +150,6 @@ public struct SidebarMenu: View {
                 EmptyView()
                     .task {
                         self.islogout = true
-                        UserDefaults.standard.set("", forKey: "isSelected")
                     }
                    
             } else {

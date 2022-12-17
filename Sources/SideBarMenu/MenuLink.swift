@@ -8,7 +8,6 @@
 import Foundation
 import WebKit
 import SwiftUI
-import WebKit
 
 @available(iOS 15.0, *)
 struct MenuLink: View {
@@ -73,40 +72,6 @@ struct MenuLink: View {
         }
     }
     
-    private func resetDefaults() {
-        
-        UserDefaults.standard.removeObject(forKey: "token")
-        UserDefaults.standard.removeObject(forKey: "userId")
-        UserDefaults.standard.removeObject(forKey: "authCode")
-        UserDefaults.standard.removeObject(forKey: "isBiometricAuth")
-        UserDefaults.standard.removeObject(forKey: "userName")
-        UserDefaults.standard.removeObject(forKey: "userAvatar")
-        UserDefaults.standard.removeObject(forKey: "userNikName")
-        UserDefaults.standard.removeObject(forKey: "biometricType")
-        
-        DispatchQueue.main.async {
-            let webView = WKWebView()
-            webView.cleanAllCookies()
-            webView.refreshCookies()
-        }
-    }
+
 }
 
-extension WKWebView {
-    
-    func cleanAllCookies() {
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        print("All cookies deleted")
-        
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-            records.forEach { record in
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                print("Cookie ::: \(record) deleted")
-            }
-        }
-    }
-    
-    func refreshCookies() {
-        self.configuration.processPool = WKProcessPool()
-    }
-}

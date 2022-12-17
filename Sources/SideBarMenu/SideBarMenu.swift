@@ -148,10 +148,11 @@ public struct SidebarMenu: View {
             }
             if isSelected == "9999" {
                 EmptyView()
-                    .onAppear {
+                    .task {
                         self.islogout = true
                         UserDefaults.standard.set("", forKey: "isSelected")
                     }
+                   
             } else {
                 content
                     .gesture(drag)

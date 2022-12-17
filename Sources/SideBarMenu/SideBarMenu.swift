@@ -148,7 +148,7 @@ public struct SidebarMenu: View {
             }
             if isSelected == "9999" {
                 EmptyView()
-                    .task {
+                    .onAppear {
                         self.islogout = true
                     }
                    

@@ -17,10 +17,13 @@ public struct SidebarMenu: View {
     private(set) var userAvatar: String
     private(set) var userNickName: String
     private var viewModel: SideBarViewModel = SideBarViewModel()
-        
+    @Binding private(set) var islogout: Bool
+    
     var sideBarWidth = UIScreen.main.bounds.size.width * 0.8 // Ширина sideBar
     
     var userProfile: some View {
+        
+        
         
         VStack(alignment: .leading) {
             
@@ -28,13 +31,8 @@ public struct SidebarMenu: View {
                 ImageAsyncLoad {
                     ImageContent(url: userAvatar, size: 50)
                 }
-//                    .clipShape(Circle())
-//                    .overlay {
-//                        Circle().stroke(.blue, lineWidth: 2)
-//                    }
-//                    .aspectRatio(3 / 2, contentMode: .fill)
-                    .shadow(radius: 4)
-                    .padding(.trailing, 18)
+                .shadow(radius: 4)
+                .padding(.trailing, 18)
                 
                 VStack(alignment: .leading, spacing: 6) {
                     
@@ -49,7 +47,7 @@ public struct SidebarMenu: View {
             }
             .padding(.bottom, 20)
         }
-
+        
         
         
     }
@@ -63,15 +61,21 @@ public struct SidebarMenu: View {
                     .onTapGesture {
                         isSidebarVisible.toggle()
                     }
-                    
+                
                 VStack(alignment: .leading, spacing: 20) {
                     userProfile
                     Divider()
                         .background(Color.white)
                     viewModel.userAction
+                    
                     Divider()
                         .background(Color.white)
                     viewModel.profileActions
+                        .onAppear {
+                            if viewModel.profileActions.itemID == 9999 {
+                                self.islogout = true
+                            }
+                        }
                 }
                 .padding(.top, 80)
                 .padding(.horizontal, 40)
@@ -83,7 +87,7 @@ public struct SidebarMenu: View {
             
             Spacer()
         }
-   
+        
         
     }
     
@@ -134,22 +138,30 @@ public struct SidebarMenu: View {
             .onTapGesture {
                 isSidebarVisible.toggle()
             }
-            
+            if viewModel.isLogout {
+                Text("logout")
+                    .onAppear {
+                        self.islogout = true
+                    }
+            } else {
                 content
                     .gesture(drag)
                     .onDisappear{
                         self.isSidebarVisible = false
                     }
+            }
+            
             
         }
         .edgesIgnoringSafeArea(.all)
         
     }
-    public init(isSidebarVisible: Binding<Bool>, userName: String, userAvatar: String, userNickName: String) {
+    public init(isSidebarVisible: Binding<Bool>,islogout: Binding<Bool>, userName: String, userAvatar: String, userNickName: String) {
         self._isSidebarVisible = isSidebarVisible
         self.userName = userName
         self.userAvatar = userAvatar
         self.userNickName = userNickName
+        self._islogout = islogout
     }
     
 }

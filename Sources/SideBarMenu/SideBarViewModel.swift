@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 @available(iOS 15.0, *)
 
-final class SideBarViewModel {
+final class SideBarViewModel: ObservableObject {
+    
+    @Published var isLogout: Bool = false
     
     let colorSet: ColorSet = ColorSet()
     private(set) var userAction = MenuLinks(items: MenuActions().userActions)

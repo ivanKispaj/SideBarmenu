@@ -28,7 +28,6 @@ struct MenuLink: View {
     @State var icon: String
     var text: String
     var toggle: Bool = false
-    @Binding var tapItemID: Int
     
     var body: some View {
         
@@ -55,9 +54,9 @@ struct MenuLink: View {
             }
         }
         .onTapGesture {
-            self.tapItemID = id
             switch id {
-
+            case 9999:
+                UserDefaults.standard.set(true, forKey: "isLogout")
             case 4002:
                 self.checked.toggle()
                 UserDefaults.standard.set(self.checked, forKey: "isBiometricAuth")

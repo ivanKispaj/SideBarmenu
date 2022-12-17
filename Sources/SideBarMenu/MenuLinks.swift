@@ -12,7 +12,6 @@ import SwiftUI
 @available(iOS 15.0.0, *)
 struct MenuLinks: View {
     @AppStorage("biometricType") private(set) var biometricType: String = ""
-    @State var itemID: Int = 0
     var items: [MenuItem]
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
@@ -21,15 +20,15 @@ struct MenuLinks: View {
                 if item.isToggle {
                     
                     if biometricType == "FaceID" {
-                        MenuLink(id: item.id, icon: "faceid", text: item.text,toggle: item.isToggle, tapItemID: $itemID)
+                        MenuLink(id: item.id, icon: "faceid", text: item.text,toggle: item.isToggle)
                     } else if biometricType == "TouchID" {
-                        MenuLink(id: item.id, icon: "touchid", text: item.text,toggle: item.isToggle, tapItemID: $itemID)
+                        MenuLink(id: item.id, icon: "touchid", text: item.text,toggle: item.isToggle)
 
                     } else {
-                        MenuLink(id: item.id, icon: item.icon, text: item.text,toggle: item.isToggle, tapItemID: $itemID)
+                        MenuLink(id: item.id, icon: item.icon, text: item.text,toggle: item.isToggle)
                     }
                 } else {
-                    MenuLink(id: item.id,icon: item.icon, text: item.text, tapItemID: $itemID)
+                    MenuLink(id: item.id,icon: item.icon, text: item.text)
                     
 
                 }

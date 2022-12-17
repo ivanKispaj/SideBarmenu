@@ -71,11 +71,7 @@ public struct SidebarMenu: View {
                     Divider()
                         .background(Color.white)
                     viewModel.profileActions
-                        .onAppear {
-                            if viewModel.profileActions.itemID == 9999 {
-                                self.islogout = true
-                            }
-                        }
+              
                 }
                 .padding(.top, 80)
                 .padding(.horizontal, 40)
@@ -138,18 +134,19 @@ public struct SidebarMenu: View {
             .onTapGesture {
                 isSidebarVisible.toggle()
             }
-            if viewModel.isLogout {
-                Text("logout")
-                    .onAppear {
-                        self.islogout = true
-                    }
-            } else {
+         
                 content
                     .gesture(drag)
                     .onDisappear{
                         self.isSidebarVisible = false
                     }
-            }
+                    .onAppear {
+                        if UserDefaults.standard.bool(forKey: "isLogout") {
+                            self.islogout = true
+                            UserDefaults.standard.set(false, forKey: "isLogout")
+                        }
+                    }
+            
             
             
         }

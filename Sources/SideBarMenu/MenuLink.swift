@@ -80,9 +80,12 @@ struct MenuLink: View {
         UserDefaults.standard.removeObject(forKey: "token")
         UserDefaults.standard.removeObject(forKey: "userId")
         UserDefaults.standard.removeObject(forKey: "authCode")
-        UserDefaults.standard.removeObject(forKey: "usedBiometrics")
-
-
+        UserDefaults.standard.removeObject(forKey: "isBiometricAuth")
+        UserDefaults.standard.removeObject(forKey: "userName")
+        UserDefaults.standard.removeObject(forKey: "userAvatar")
+        UserDefaults.standard.removeObject(forKey: "userNikName")
+        UserDefaults.standard.removeObject(forKey: "biometricType")
+        
         DispatchQueue.main.async {
             let webView = WKWebView()
             webView.cleanAllCookies()

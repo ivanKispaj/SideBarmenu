@@ -1,7 +1,17 @@
 /*
- 
- 
- 
+ // SideBarMenu
+ //
+ // Created by Ivan Koishchev 17.12.2022
+ //
+ // $isSideBarVisible :  true -> visible sidebar, false -> invisible sidebar
+ // isLogout : true -> logout user, false -> none
+ //
+ // userName : user name
+ // userAvatar: string url for user avatar
+ // userNikName: user nick name
+ //
+ // sideBarWidth: side bar width
+ //
  */
 
 
@@ -12,21 +22,19 @@ import AvatarAsyncLoad
 @available(iOS 15.0, *)
 public struct SidebarMenu: View {
     
+    @AppStorage("isSelected") private(set) var isSelected: String = ""
     @Binding public var isSidebarVisible: Bool
+    @Binding private(set) var islogout: Bool
     private(set) var userName: String
     private(set) var userAvatar: String
     private(set) var userNickName: String
     private var viewModel: SideBarViewModel = SideBarViewModel()
-    @Binding private(set) var islogout: Bool
-    
     var sideBarWidth = UIScreen.main.bounds.size.width * 0.8 // Ширина sideBar
-    
+  
+    // View User profile
     var userProfile: some View {
         
-        
-        
         VStack(alignment: .leading) {
-            
             HStack {
                 ImageAsyncLoad {
                     ImageContent(url: userAvatar, size: 50)
@@ -52,10 +60,12 @@ public struct SidebarMenu: View {
         
     }
     
+    // View 
     var content: some View {
         
         HStack(alignment: .top) {
             ZStack(alignment: .top) {
+                
                 viewModel.colorSet.bgColor
                 MenuChevron
                     .onTapGesture {
@@ -71,6 +81,7 @@ public struct SidebarMenu: View {
                     Divider()
                         .background(Color.white)
                     viewModel.profileActions
+                      
                     
                 }
                 .padding(.top, 80)
@@ -83,10 +94,9 @@ public struct SidebarMenu: View {
             
             Spacer()
         }
-        
-        
     }
     
+  // Chevron View
     var MenuChevron: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 18)
@@ -108,6 +118,8 @@ public struct SidebarMenu: View {
         .offset(x: sideBarWidth / 2, y: 80)
         .animation(.default, value: isSidebarVisible)
     }
+    
+    // SideBaeMEnu View
     
     public var body: some View {
         let drag = DragGesture()
@@ -134,11 +146,11 @@ public struct SidebarMenu: View {
             .onTapGesture {
                 isSidebarVisible.toggle()
             }
-            if UserDefaults.standard.bool(forKey: "isLogout") {
+            if isSelected == "9999" {
                 EmptyView()
                     .onAppear {
                         self.islogout = true
-                        UserDefaults.standard.set(false, forKey: "isLogout")
+                        UserDefaults.standard.set("", forKey: "isSelected")
                     }
             } else {
                 content
@@ -152,12 +164,14 @@ public struct SidebarMenu: View {
         .edgesIgnoringSafeArea(.all)
         
     }
-    public init(isSidebarVisible: Binding<Bool>,islogout: Binding<Bool>, userName: String, userAvatar: String, userNickName: String) {
+    
+    // MARK: - Init
+    public init(isSidebarVisible: Binding<Bool>, islogout: Binding<Bool>, userName: String, userAvatar: String, userNickName: String) {
         self._isSidebarVisible = isSidebarVisible
+        self._islogout = islogout
         self.userName = userName
         self.userAvatar = userAvatar
         self.userNickName = userNickName
-        self._islogout = islogout
     }
     
 }

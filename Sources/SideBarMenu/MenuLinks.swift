@@ -11,8 +11,11 @@ import SwiftUI
 
 @available(iOS 15.0.0, *)
 struct MenuLinks: View {
+    
     @AppStorage("biometricType") private(set) var biometricType: String = ""
     var items: [MenuItem]
+    
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             ForEach(items) { item in

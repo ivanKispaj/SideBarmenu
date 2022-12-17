@@ -56,7 +56,7 @@ struct MenuLink: View {
         .onTapGesture {
             switch id {
             case 9999:
-                UserDefaults.standard.set(true, forKey: "isLogout")
+                UserDefaults.standard.set("9999", forKey: "isSelected")
             case 4002:
                 self.checked.toggle()
                 UserDefaults.standard.set(self.checked, forKey: "isBiometricAuth")

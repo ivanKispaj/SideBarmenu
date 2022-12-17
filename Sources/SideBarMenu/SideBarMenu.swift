@@ -150,8 +150,9 @@ public struct SidebarMenu: View {
                 content
                     .gesture(drag)
                     .onDisappear{
-                        self.isSidebarVisible = false
+                   
                         self.islogout = true
+                        self.isSidebarVisible = false
                     }
                     .onAppear {
                         self.islogout = true

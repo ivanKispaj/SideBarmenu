@@ -185,7 +185,7 @@ public struct SidebarMenu: View {
         UserDefaults.standard.removeObject(forKey: "userAvatar")
         UserDefaults.standard.removeObject(forKey: "userNikName")
         UserDefaults.standard.removeObject(forKey: "biometricType")
-        
+        UserDefaults.standard.removeObject(forKey: "isSelected")
         DispatchQueue.main.async {
             let webView = WKWebView()
             webView.cleanAllCookies()

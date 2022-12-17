@@ -147,7 +147,12 @@ public struct SidebarMenu: View {
                 isSidebarVisible.toggle()
             }
             if isSelected == "9999" {
-                EmptyView()
+                content
+                    .gesture(drag)
+                    .onDisappear{
+                        self.isSidebarVisible = false
+                        self.islogout = true
+                    }
                     .onAppear {
                         self.islogout = true
                     }
